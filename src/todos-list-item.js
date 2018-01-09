@@ -20,7 +20,7 @@ export default class TodosListItem extends Component {
       return (
         <td> 
           <form onSubmit={this.onSaveClick.bind(this)}>
-            <input type='text' defaultValue={task} ref='editInput'></input>
+            <input className="isEditingForm" type='text' defaultValue={task} ref='editInput'></input>
           </form>
         </td>
       );

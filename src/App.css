@@ -73,4 +73,7 @@ td>button{
 	background-color: red;
 }
 
-
+.isEditingForm{
+	padding-bottom:4px;
+	padding-top: 4px;
+}

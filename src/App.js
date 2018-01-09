@@ -20,6 +20,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       todos, //ES6 syntax for todos: todos
+      complete: 1,
+      incomplete: 1,
     };
   }
 
@@ -28,7 +30,7 @@ export default class App extends Component {
       <div className="app">
         <h1>React Todo App </h1>
         <CreateTodo createTask={this.createTask.bind(this)} />
-        <TodoCounter />
+        <TodoCounter complete={this.state.complete} incomplete={this.state.incomplete}/>
         <TodosList todos={this.state.todos} 
                    deleteTask={this.deleteTask.bind(this)}
                    toggleTask={this.toggleTask.bind(this)}
@@ -43,16 +45,21 @@ export default class App extends Component {
       task, // ES6 Syntax: task: task
       isComplete: false
     });
+    this.state.incomplete++;
     this.setState({ todos: this.state.todos });
   }
 
   deleteTask(task){
+    const foundTodo = this.state.todos.find((todo) => todo.task === task);
+    foundTodo.isCompleted ? this.state.complete-- : this.state.incomplete--;
     const newTodos = this.state.todos.filter((todo) => todo.task !== task);
     this.setState({ todos: newTodos });
   }
 
   toggleTask(task){
+    console.log(task);
     const foundTodo = this.state.todos.find((todo) => todo.task === task);
+    foundTodo.isCompleted ? (this.state.complete--, this.state.incomplete++) : (this.state.incomplete--, this.state.complete++);
     foundTodo.isCompleted = !foundTodo.isCompleted;
     this.setState({ todos: this.state.todos });
   }
